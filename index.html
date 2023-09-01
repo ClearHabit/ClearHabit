@@ -1,1 +1,39 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><!--[if IE]><link rel="icon" href="favicon.ico"><![endif]--><title>clean-cordova</title><meta name="apple-mobile-web-app-capable" content="yes"><link href="js/chunk-5410deea.3aff4130.js" rel="prefetch"><link href="js/chunk-70062f66.fcf35f07.js" rel="prefetch"><link href="js/app.f9e841ca.js" rel="preload" as="script"><link href="js/chunk-vendors.2c31022d.js" rel="preload" as="script"><link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#4881ce"><meta name="apple-mobile-web-app-capable" content="no"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Clear清单"><link rel="apple-touch-icon" href="img/icons/apple-touch-icon-152x152.png"><link rel="mask-icon" href="img/icons/safari-pinned-tab.svg" color="#4881ce"><meta name="msapplication-TileImage" content="img/icons/msapplication-icon-144x144.png"><meta name="msapplication-TileColor" content="#ffffff"></head><body><noscript><strong>We're sorry but clean-cordova doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="js/chunk-vendors.2c31022d.js"></script><script src="js/app.f9e841ca.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>摄像头调用1</title>
+</head>
+
+<body>
+    <video id="v"></video>
+    <script>
+        !(function () {
+            function userMedia() {
+                return navigator.getUserMedia = navigator.getUserMedia ||
+                    navigator.webkitGetUserMedia ||
+                    navigator.mozGetUserMedia ||
+                    navigator.msGetUserMedia || null;
+            }
+            if (userMedia()) {
+                var constraints = {
+                    video: true,
+                    audio: false
+                };
+                var media = navigator.getUserMedia(constraints, function (stream) {
+                    var v = document.getElementById('v');
+                    var url = window.URL || window.webkitURL;
+                    v.src = url ? url.createObjectURL(stream) : stream;
+                    v.play();
+                }, function (error) {
+                    console.log("ERROR");
+                    console.log(error);
+                });
+            } else {
+                console.log("不支持");
+            }
+        })();
+    </script>
+</body>
+</html>
